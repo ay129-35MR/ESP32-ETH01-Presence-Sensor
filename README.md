@@ -1,5 +1,7 @@
 # ESP32-ETH01-Presence-Sensor
-A rock solid wired (AC and Ethernet) mmWave presence sensorusing:
+![Assembled presence sensor board](IMG_6811.jpeg)
+
+A rock solid wired (AC and Ethernet) mmWave presence sensor using:
 
 - **WT32-ETH01** (ESP32 + LAN8720)
 - **LD2410C** mmWave radar
