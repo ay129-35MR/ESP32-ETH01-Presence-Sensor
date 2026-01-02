@@ -1,0 +1,135 @@
+esphome:
+  name: <device_name>                # e.g. bathroom-presence
+  friendly_name: <friendly_name>     # e.g. Bathroom Presence
+  platformio_options:
+    board_build.flash_mode: dio
+
+esp32:
+  board: wt32-eth01
+  framework:
+    type: arduino
+
+# Ethernet configuration for WT32-ETH01
+ethernet:
+  type: LAN8720
+  mdc_pin: GPIO23
+  mdio_pin: GPIO18
+  clk:
+    pin: GPIO0
+    mode: CLK_EXT_IN
+  phy_addr: 1
+  power_pin: GPIO16
+
+  # Optional static IP configuration
+  # Remove this entire block if you prefer DHCP
+  manual_ip:
+    static_ip: <static_ip>            # e.g. 192.168.1.50
+    gateway: <gateway_ip>             # e.g. 192.168.1.1
+    subnet: <subnet_mask>             # e.g. 255.255.255.0
+    dns1: <dns_primary>               # e.g. 192.168.1.1
+    dns2: <dns_secondary>             # e.g. 8.8.8.8
+
+# Local web interface (optional)
+web_server:
+  port: 80
+  local: true
+  include_internal: true
+
+# LD2410C mmWave UART
+# Wiring:
+#   ESP32 GPIO17 (TXD) -> LD2410 RX
+#   ESP32 GPIO5  (RXD) -> LD2410 TX
+#   GND -> GND
+#   VCC -> 5V (verify your LD2410 variant)
+uart:
+  id: ld2410_uart
+  tx_pin: GPIO17
+  rx_pin: GPIO5
+  baud_rate: 256000
+  parity: NONE
+  stop_bits: 1
+
+ld2410:
+  uart_id: ld2410_uart
+
+# Presence binary sensor
+binary_sensor:
+  - platform: ld2410
+    has_target:
+      name: Presence
+      filters:
+        - delayed_on: 3s              # Suppress false positives
+        - delayed_off: 30s            # Prevent rapid drop-outs
+
+# Sensors
+sensor:
+  - platform: ld2410
+    detection_distance:
+      name: Detection Distance
+      internal: true
+      filters:
+        - throttle: 30s
+        - delta: 0.5
+
+  - platform: uptime
+    type: seconds
+    name: Uptime
+
+  - platform: debug
+    free:
+      name: ESP Heap Free
+    loop_time:
+      name: ESP Loop Time
+
+# Text sensors
+text_sensor:
+  - platform: ld2410
+    version:
+      name: LD2410 Firmware Version
+      internal: true
+
+  - platform: debug
+    reset_reason:
+      name: ESP Reset Reason
+
+# LD2410 controls (hidden by default)
+number:
+  - platform: ld2410
+    timeout:
+      internal: true
+    max_move_distance_gate:
+      internal: true
+    max_still_distance_gate:
+      internal: true
+
+switch:
+  - platform: ld2410
+    engineering_mode:
+      internal: true
+
+button:
+  - platform: ld2410
+    factory_reset:
+      internal: true
+
+  - platform: restart
+    name: Restart
+    entity_category: config
+
+# Reduce UART/log noise
+logger:
+  level: WARN
+
+# Home Assistant API
+api:
+  encryption:
+    key: "<api_encryption_key>"       # Generate via ESPHome
+
+# OTA updates
+ota:
+  - platform: esphome
+    password: "<ota_password>"
+
+# Debug component
+debug:
+  update_interval: 10s
