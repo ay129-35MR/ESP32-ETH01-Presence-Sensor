@@ -1,5 +1,5 @@
 # ESP32-ETH01-Presence-Sensor
-![Assembled presence sensor board](IMG_6811.jpeg)
+![Assembled presence sensor board](IMG_6808.jpeg)
 
 A rock solid wired (AC and Ethernet) mmWave presence sensor using:
 
