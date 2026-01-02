@@ -83,11 +83,11 @@ on the underside of the perfboard are soldered wires to and from the HiLink's AC
 
 Known-good, repeatable wiring uses the **RXD / TXD header pins** on the WT32-ETH01:
 
-| Signal | WT32-ETH01 Pin | ESP32 GPIO | Why |
+| LD2410 Signal | WT32-ETH01 Pin | ESP32 GPIO | Why |
 |--------|----------------|------------|-----|
 | TX (LD2410 → ESP32) | RXD | GPIO5 | Not a strapping pin |
 | RX (ESP32 → LD2410) | TXD | GPIO17 | Not a strapping pin |
-| VCC | 3.3V | — | LD2410 UART logic level |
+| VCC | 5V  | — | 5V rail |
 | GND | GND | — | Common ground |
 
 ### Why not GPIO4 / GPIO0 / GPIO12?
