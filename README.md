@@ -118,7 +118,7 @@ This wiring is used successfully by multiple ETH01 + ESPHome builds and has zero
 
 ## Flashing ESPHome
 
-The YAML configuration is provided in [`presence-sensor.yaml`](presence-sensor.yaml) (adjust filename as needed).
+The YAML configuration is provided in [`Presence sensor.yaml`](Presence sensor.yaml).
 
 ### Initial Flash (Serial — Required Once)
 
@@ -134,6 +134,9 @@ The WT32-ETH01 must be flashed via serial the first time - it doesn't have a USB
 4. **Compile and upload:**
    ```bash
    esphome run presence-sensor.yaml
+
+once flashed youll need to adopt the device in home assistant.  all future firmware updates will be OTA.
+
 ---
 
 ## Bathroom-Specific Tuning Notes
