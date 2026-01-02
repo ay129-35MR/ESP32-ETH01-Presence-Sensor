@@ -51,32 +51,7 @@ If you're not confident working with mains voltage, don't. Get someone qualified
 - Isolated AC → 5V
 - Enough current headroom (2A)
 - Small, certified, predictable thermal behavior
-
 ---
-
-## UART Pin Choice
-
-Known-good, repeatable wiring uses the **RXD / TXD header pins** on the WT32-ETH01:
-
-| Signal | WT32-ETH01 Pin | ESP32 GPIO | Why |
-|--------|----------------|------------|-----|
-| TX (LD2410 → ESP32) | RXD | GPIO5 | Not a strapping pin |
-| RX (ESP32 → LD2410) | TXD | GPIO17 | Not a strapping pin |
-| VCC | 3.3V | — | LD2410 UART logic level |
-| GND | GND | — | Common ground |
-
-### Why not GPIO4 / GPIO0 / GPIO12?
-
-They are boot strapping pins. They **will** bite you eventually.
-
-### Why not RX0 / TX0?
-
-They are fine electrically, but collide with flashing and boot logs. RXD/TXD avoids that completely.
-
-This wiring is used successfully by multiple ETH01 + ESPHome builds and has zero boot side-effects.
-
----
-
 ## Power Architecture
 
 - HLK-10M05 provides 5V from mains
@@ -102,6 +77,30 @@ This build uses a standard **double-sided perfboard** as the carrier, with compo
 - **LD2410** (small blue PCB, bottom-right) is positioned with its antenna facing into the room — orientation matters for detection pattern.
 
 ### Wiring
+on the underside of the perfboard are soldered wires to and from the HiLink's AC and DC outputs to the AC terminal block and the DC 5v and ground rail distribution  block respectively.  the surface connections use dupont connectors to provide power to and interface the LD2410 and the WT32-ETH01 as below: 
+
+## UART Pin Choice
+
+Known-good, repeatable wiring uses the **RXD / TXD header pins** on the WT32-ETH01:
+
+| Signal | WT32-ETH01 Pin | ESP32 GPIO | Why |
+|--------|----------------|------------|-----|
+| TX (LD2410 → ESP32) | RXD | GPIO5 | Not a strapping pin |
+| RX (ESP32 → LD2410) | TXD | GPIO17 | Not a strapping pin |
+| VCC | 3.3V | — | LD2410 UART logic level |
+| GND | GND | — | Common ground |
+
+### Why not GPIO4 / GPIO0 / GPIO12?
+
+They are boot strapping pins. They **will** bite you eventually.
+
+### Why not RX0 / TX0?
+
+They are fine electrically, but collide with flashing and boot logs. RXD/TXD avoids that completely.
+
+This wiring is used successfully by multiple ETH01 + ESPHome builds and has zero boot side-effects.
+
+---
 
 - **Orange and red wires** connect the LD2410 to the WT32-ETH01 UART (TX/RX as per table above).
 - **Green and yellow wires** route 5V and GND from the Hi-Link to the WT32-ETH01 power input.
