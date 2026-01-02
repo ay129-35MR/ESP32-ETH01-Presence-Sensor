@@ -114,6 +114,28 @@ This wiring is used successfully by multiple ETH01 + ESPHome builds and has zero
 
 ---
 
+---
+
+## Flashing ESPHome
+
+The YAML configuration is provided in [`presence-sensor.yaml`](presence-sensor.yaml) (adjust filename as needed).
+
+### Initial Flash (Serial — Required Once)
+
+The WT32-ETH01 must be flashed via serial the first time - it doesn't have a USB port like other ESP32 boards. You'll need a USB-to-TTL adapter (3.3V logic).
+
+1. **Disconnect from mains** — flash the board before it's wired to AC.
+2. **Connect the serial adapter:**
+   - `TX` (adapter) → `RX0` (WT32-ETH01)
+   - `RX` (adapter) → `TX0` (WT32-ETH01)
+   - `GND` → `GND`
+   - `3.3V` → `3V3` (or power the board separately via 5V)
+3. **Enter flash mode:** Hold `IO0` low while powering on, or briefly pull `IO0` to GND and press EN/reset.  a dupont connector shortinh GPIO0 and GND does the trick for me.
+4. **Compile and upload:**
+   ```bash
+   esphome run presence-sensor.yaml
+---
+
 ## Bathroom-Specific Tuning Notes
 
 - **Delayed OFF (30s)** prevents lights switching off mid-shower
