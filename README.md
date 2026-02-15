@@ -1,3 +1,6 @@
+[![Buy Me A Coffee](https://img.shields.io/badge/Buy%20Me%20A%20Coffee-ffdd00?logo=buy-me-a-coffee&logoColor=black)](https://buymeacoffee.com/ay129)
+[![Donate](https://img.shields.io/badge/Donate-PayPal-blue.svg)](https://www.paypal.com/donate?business=nyashachipanga%40yahoo.com&currency_code=GBP)
+
 # ESP32-ETH01-Presence-Sensor
 ![Assembled presence sensor board](IMG_6808.jpeg)
 
@@ -169,4 +172,12 @@ If you want:
 - Wired reliability
 - No boot pin voodoo
 
-This combination works — not theoretically, but on the bench and on the wall.
+This combination works on the bench and on the wall.
+
+## Support
+
+If you find this useful:
+
+[![Buy Me A Coffee](https://img.shields.io/badge/Buy%20Me%20A%20Coffee-ffdd00?logo=buy-me-a-coffee&logoColor=black)](https://buymeacoffee.com/ay129)
+[![Donate](https://img.shields.io/badge/Donate-PayPal-blue.svg)](https://www.paypal.com/donate?business=nyashachipanga%40yahoo.com&currency_code=GBP)
+
